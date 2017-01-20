@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <curl/curl.h>
+#include "getpage.h"
 
 void getpage(char **args)
 {
@@ -21,10 +22,4 @@ void getpage(char **args)
         curl_easy_cleanup(curl);
         fclose(fp);
     }
-}
-
-int main(void){
-  char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
-  getpage(argss);
-  return 0;
 }
