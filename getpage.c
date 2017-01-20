@@ -2,15 +2,14 @@
 #include <string.h>
 #include <curl/curl.h>
 
-
-
-int main(int argc, char **argv)
+void getpage(char **args)
 {
     CURL *curl;
     FILE *fp;
     CURLcode res;
-    char *url = argv[1], outfile[FILENAME_MAX];
-    strcpy(outfile,argv[2]);
+    char *url = args[0], outfile[FILENAME_MAX];
+    printf("%s\n", args[1]);
+    strcpy(outfile,args[1]);
     curl = curl_easy_init();
     if (curl)
     {
@@ -22,5 +21,10 @@ int main(int argc, char **argv)
         curl_easy_cleanup(curl);
         fclose(fp);
     }
-    return 0;
+}
+
+int main(void){
+  char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
+  getpage(argss);
+  return 0;
 }
