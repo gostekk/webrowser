@@ -485,8 +485,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "page1.l"
-#line 2 "page1.l"
+#line 1 "page.l"
+#line 2 "page.l"
 // Headers
 #include <stdio.h>
 #include <string.h>
@@ -747,7 +747,7 @@ YY_DECL
 		}
 
 	{
-#line 42 "page1.l"
+#line 42 "page.l"
 
 #line 753 "lex.yy.c"
 
@@ -808,22 +808,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 43 "page1.l"
+#line 43 "page.l"
 { BEGIN STRING; s = buf; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 44 "page1.l"
+#line 44 "page.l"
 { BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 45 "page1.l"
+#line 45 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 46 "page1.l"
+#line 46 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -831,49 +831,49 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 50 "page1.l"
+#line 50 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 51 "page1.l"
+#line 51 "page.l"
 { s = buf;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 52 "page1.l"
+#line 52 "page.l"
 { printf("desu" );*s++ = '\n'; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 53 "page1.l"
+#line 53 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 54 "page1.l"
+#line 54 "page.l"
 { *s++ = '\n'; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 55 "page1.l"
+#line 55 "page.l"
 {   *s = 0;
                 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 58 "page1.l"
+#line 58 "page.l"
 { printf("%s", yytext); *s++ = *yytext; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 61 "page1.l"
+#line 61 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 62 "page1.l"
+#line 62 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
@@ -881,12 +881,12 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 65 "page1.l"
+#line 65 "page.l"
 {}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 66 "page1.l"
+#line 66 "page.l"
 ECHO;
 	YY_BREAK
 #line 893 "lex.yy.c"
@@ -1893,7 +1893,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 66 "page1.l"
+#line 66 "page.l"
 
 
 bool init()
@@ -1912,7 +1912,7 @@ bool init()
 	}
 	//Initialize SDL_ttf
 	TTF_Init();
-	font = TTF_OpenFont("lazy.ttf", 25);
+	font = TTF_OpenFont("Ubuntu-BI.ttf", 12);
 	//If there was an error in setting font
 	if(TTF_Init() == -1)
 	{
@@ -1963,8 +1963,10 @@ int main()
 	//Renderer the window
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
+	//Testing rendering fonts
+	char pony[50] = "pony";
 	//Render message
-	message = TTF_RenderText_Solid(font, "PonyBrowser", textColour);
+	message = TTF_RenderText_Solid(font, pony, textColour);
 	//Create texture from surface
 	texture = SDL_CreateTextureFromSurface(renderer, message);
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);

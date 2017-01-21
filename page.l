@@ -80,7 +80,7 @@ bool init()
 	}
 	//Initialize SDL_ttf
 	TTF_Init();
-	font = TTF_OpenFont("lazy.ttf", 25);
+	font = TTF_OpenFont("Ubuntu-BI.ttf", 12);
 	//If there was an error in setting font
 	if(TTF_Init() == -1)
 	{
@@ -131,8 +131,10 @@ int main()
 	//Renderer the window
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
+	//Testing rendering fonts
+	char pony[50] = "pony";
 	//Render message
-	message = TTF_RenderText_Solid(font, "PonyBrowser", textColour);
+	message = TTF_RenderText_Solid(font, pony, textColour);
 	//Create texture from surface
 	texture = SDL_CreateTextureFromSurface(renderer, message);
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
