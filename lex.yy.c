@@ -491,6 +491,7 @@ char *yytext;
 #include <string.h>
 #include <SDL2/SDL.h>
 #include "getpage.h"
+#include <SDL2/SDL_ttf.h>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -505,7 +506,7 @@ char *s;
 
 
 
-#line 509 "lex.yy.c"
+#line 510 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -726,9 +727,9 @@ YY_DECL
 		}
 
 	{
-#line 21 "page.l"
+#line 22 "page.l"
 
-#line 732 "lex.yy.c"
+#line 733 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -787,22 +788,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 22 "page.l"
+#line 23 "page.l"
 { BEGIN STRING; s = buf; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 23 "page.l"
+#line 24 "page.l"
 { BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 24 "page.l"
+#line 25 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 25 "page.l"
+#line 26 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -810,49 +811,49 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 29 "page.l"
+#line 30 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 30 "page.l"
+#line 31 "page.l"
 { s = buf;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 31 "page.l"
+#line 32 "page.l"
 { printf("desu" );*s++ = '\n'; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 32 "page.l"
+#line 33 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 33 "page.l"
+#line 34 "page.l"
 { *s++ = '\n'; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 34 "page.l"
+#line 35 "page.l"
 {   *s = 0;
                 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 37 "page.l"
+#line 38 "page.l"
 { printf("%s", yytext); *s++ = *yytext; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 40 "page.l"
+#line 41 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 41 "page.l"
+#line 42 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
@@ -860,15 +861,15 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 44 "page.l"
+#line 45 "page.l"
 {}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 45 "page.l"
+#line 46 "page.l"
 ECHO;
 	YY_BREAK
-#line 872 "lex.yy.c"
+#line 873 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1872,7 +1873,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 45 "page.l"
+#line 46 "page.l"
 
 
 int main(argc, argv)
@@ -1888,6 +1889,7 @@ if( SDL_Init( SDL_INIT_VIDEO ) < 0)
 }
 else
 {
+	TTF_Init();
         window = SDL_CreateWindow("PonyBrowser", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if(window == NULL)
         {
@@ -1896,6 +1898,7 @@ else
         else
         {
 		renderer = SDL_CreateRenderer(window, -1, 0);
+		TTF_Font * font = TTF_OpenFont("arial.ttf", 25);
 		if(renderer == NULL)
 		{
 			printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -1911,9 +1914,18 @@ else
 					SDL_SetRenderDrawColor(renderer, 0,0,0,255);
 					SDL_RenderClear(renderer);
 					SDL_RenderPresent(renderer);
+					SDL_Color color = { 255, 255, 255};
+					SDL_Surface * surface = TTF_RenderText_Solid(font, "Welcome", color);
+					SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+					SDL_RenderCopy(renderer, texture, NULL, NULL);
+					SDL_RendererPresent(renderer);
 					break;
 					}
 				}while(e.type != SDL_QUIT);
+				SDL_DestroyTexture(texture);
+				SDL_FreeSurface(surface);
+				TTF_CloseFont(font);
+				TTF_Quit();
 				return 0;
 		}
         }

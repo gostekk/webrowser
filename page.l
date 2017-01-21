@@ -3,6 +3,7 @@
 #include <string.h>
 #include <SDL2/SDL.h>
 #include "getpage.h"
+#include <SDL2/SDL_ttf.h>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -56,6 +57,7 @@ if( SDL_Init( SDL_INIT_VIDEO ) < 0)
 }
 else
 {
+	TTF_Init();
         window = SDL_CreateWindow("PonyBrowser", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if(window == NULL)
         {
@@ -64,6 +66,7 @@ else
         else
         {
 		renderer = SDL_CreateRenderer(window, -1, 0);
+		TTF_Font * font = TTF_OpenFont("arial.ttf", 25);
 		if(renderer == NULL)
 		{
 			printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -79,9 +82,18 @@ else
 					SDL_SetRenderDrawColor(renderer, 0,0,0,255);
 					SDL_RenderClear(renderer);
 					SDL_RenderPresent(renderer);
+					SDL_Color color = { 255, 255, 255};
+					SDL_Surface * surface = TTF_RenderText_Solid(font, "Welcome", color);
+					SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+					SDL_RenderCopy(renderer, texture, NULL, NULL);
+					SDL_RendererPresent(renderer);
 					break;
 					}
 				}while(e.type != SDL_QUIT);
+				SDL_DestroyTexture(texture);
+				SDL_FreeSurface(surface);
+				TTF_CloseFont(font);
+				TTF_Quit();
 				return 0;
 		}
         }
