@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "getpage.h"
 #include <string.h>
+#include "gui.h"
 char *yylval;
 int title=0;
 int yywrap();
