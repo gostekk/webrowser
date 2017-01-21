@@ -113,22 +113,21 @@ void clean_up()
 	//Quit SDL
 	SDL_Quit();
 }
-int main()
-{	
+bool startWindow(void)
+{
 	//Quit flag
 	bool quit = false;
+	//Variables
 	int texW = 0;
 	int texH = 0;
-	//int argc;
-	//char** argv;
-	//Initialize
+
 	if(init() == false)
-	{
+	{	
 		return 1;
 	}
 	//Set the background colour
 	SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-	//Renderer the window
+	//Render the window
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
 	//Testing rendering fonts
@@ -139,29 +138,28 @@ int main()
 	texture = SDL_CreateTextureFromSurface(renderer, message);
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 	SDL_Rect dstrect = {0, 0, texW, texH};
-	
 	//If there was an error in rendering text
 	if(message == NULL)
 	{
 		return 1;
 	}
-	//While the user hasn't quit
 	while(quit == false)
 	{
-		//While there's events to handle
 		while(SDL_PollEvent(&event))
 		{
-			//If the user has X out the window
 			if(event.type == SDL_QUIT)
 			{
 				quit = true;
 				break;
 			}
 		}
-		SDL_RenderCopy(renderer,texture, NULL, &dstrect);
-		SDL_RenderPresent(renderer);	
+		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+		SDL_RenderPresent(renderer);
 	}
 
+}
+int main()
+{	
         char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
         getpage(argss);
         FILE *file;
@@ -173,6 +171,7 @@ int main()
         }
         yyin = file;
 	yylex();
+	startWindow();
 	clean_up();
 	return 0;
 	
