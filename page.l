@@ -49,8 +49,9 @@ int argc;
 char** argv;
 {
 SDL_Window* window = NULL;
-SDL_Surface* screenSurface = NULL;
-SDL_Renderer *renderer = NULL;
+SDL_Surface* surface = NULL;
+SDL_Renderer* renderer = NULL;
+SDL_Texture* texture = NULL;
 if( SDL_Init( SDL_INIT_VIDEO ) < 0)
 {
         printf("SDL coult not initalize! SDL_Error: %s\n", SDL_GetError());
@@ -86,7 +87,6 @@ else
 					SDL_Surface * surface = TTF_RenderText_Solid(font, "Welcome", color);
 					SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
 					SDL_RenderCopy(renderer, texture, NULL, NULL);
-					SDL_RendererPresent(renderer);
 					break;
 					}
 				}while(e.type != SDL_QUIT);
