@@ -53,5 +53,5 @@ char** argv;
         }
         yyin = file;
 yylex();
-//eprintf("%d\n", title);
+gui();
 }

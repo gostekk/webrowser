@@ -26,4 +26,5 @@ void gui(void)
 		SDL_UpdateWindowSurface(window);
 		}
 	}
+	SDL_Delay(20000);
 }
