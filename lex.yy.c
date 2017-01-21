@@ -485,16 +485,36 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "page.l"
-#line 2 "page.l"
+#line 1 "page1.l"
+#line 2 "page1.l"
+// Headers
 #include <stdio.h>
 #include <string.h>
 #include <SDL2/SDL.h>
 #include "getpage.h"
 #include <SDL2/SDL_ttf.h>
+#include <stdbool.h>
 
+// Screen attributes
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+const int SCREEN_BPP = 32;
+
+//The surfaces
+SDL_Surface * message = NULL;
+SDL_Window * window = NULL;
+SDL_Renderer * renderer = NULL;
+//The texture
+SDL_Texture * texture = NULL;
+//The event structure
+SDL_Event event;
+
+//Font
+TTF_Font * font = NULL;
+
+//The color of the font
+SDL_Color textColour = {125, 125, 125};
+
 char *yylval;
 int title=0;
 char titlee[50];
@@ -506,7 +526,7 @@ char *s;
 
 
 
-#line 510 "lex.yy.c"
+#line 530 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -727,9 +747,9 @@ YY_DECL
 		}
 
 	{
-#line 22 "page.l"
+#line 42 "page1.l"
 
-#line 733 "lex.yy.c"
+#line 753 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -788,22 +808,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 23 "page.l"
+#line 43 "page1.l"
 { BEGIN STRING; s = buf; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 24 "page.l"
+#line 44 "page1.l"
 { BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 25 "page.l"
+#line 45 "page1.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 26 "page.l"
+#line 46 "page1.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -811,49 +831,49 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 30 "page.l"
+#line 50 "page1.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 31 "page.l"
+#line 51 "page1.l"
 { s = buf;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 32 "page.l"
+#line 52 "page1.l"
 { printf("desu" );*s++ = '\n'; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 33 "page.l"
+#line 53 "page1.l"
 { BEGIN 0;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 34 "page.l"
+#line 54 "page1.l"
 { *s++ = '\n'; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 35 "page.l"
+#line 55 "page1.l"
 {   *s = 0;
                 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 38 "page.l"
+#line 58 "page1.l"
 { printf("%s", yytext); *s++ = *yytext; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 41 "page.l"
+#line 61 "page1.l"
 { BEGIN 0;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 42 "page.l"
+#line 62 "page1.l"
 { titlee[title]=*yytext;
                   title++;
                   }
@@ -861,15 +881,15 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 45 "page.l"
+#line 65 "page1.l"
 {}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 46 "page.l"
+#line 66 "page1.l"
 ECHO;
 	YY_BREAK
-#line 873 "lex.yy.c"
+#line 893 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1873,63 +1893,104 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 46 "page.l"
+#line 66 "page1.l"
 
 
-int main(argc, argv)
-int argc;
-char** argv;
+bool init()
 {
-SDL_Window* window = NULL;
-SDL_Surface* surface = NULL;
-SDL_Renderer* renderer = NULL;
-SDL_Texture* texture = NULL;
-if( SDL_Init( SDL_INIT_VIDEO ) < 0)
-{
-        printf("SDL coult not initalize! SDL_Error: %s\n", SDL_GetError());
-}
-else
-{
+	//Initialize all SDL subsystems
+	if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
+	{
+		return false;
+	}
+	//Set up the screen
+	window = SDL_CreateWindow("PonyBrowser", 0,0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	//If there was an error in setting up the window
+	if(window == NULL)
+	{
+		return false;
+	}
+	//Initialize SDL_ttf
 	TTF_Init();
-        window = SDL_CreateWindow("PonyBrowser", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-        if(window == NULL)
-        {
-                printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        }
-        else
-        {
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		TTF_Font * font = TTF_OpenFont("arial.ttf", 25);
-		if(renderer == NULL)
-		{
-			printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
-		}
-		else
-		{
-			SDL_Event e;
-			do{
-				SDL_WaitEvent(&e);
-				switch(e.type)
-				{
-				case SDL_WINDOWEVENT:
-					SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-					SDL_RenderClear(renderer);
-					SDL_RenderPresent(renderer);
-					SDL_Color color = { 255, 255, 255};
-					SDL_Surface * surface = TTF_RenderText_Solid(font, "Welcome", color);
-					SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
-					SDL_RenderCopy(renderer, texture, NULL, NULL);
-					break;
-					}
-				}while(e.type != SDL_QUIT);
-				SDL_DestroyTexture(texture);
-				SDL_FreeSurface(surface);
-				TTF_CloseFont(font);
-				TTF_Quit();
-				return 0;
-		}
-        }
+	font = TTF_OpenFont("lazy.ttf", 25);
+	//If there was an error in setting font
+	if(TTF_Init() == -1)
+	{
+		return false;
+	}
+	//Set up the renderer
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	//If there was an error in setting in the renderer
+	if(renderer == NULL)
+	{
+		return false;
+	}
+	//If everything initalized fine
+	return true;	
 }
+void clean_up()
+{
+	//Clean the texture
+	SDL_DestroyTexture(texture);
+	//Clean surface
+	SDL_FreeSurface(message);
+	//Close the font
+	TTF_CloseFont(font);
+	//Clean Renderer
+	SDL_DestroyRenderer(renderer);
+	//Clean window
+	SDL_DestroyWindow(window);	
+	//Quit SDL_ttf
+	TTF_Quit();
+	//Quit SDL
+	SDL_Quit();
+}
+int main()
+{	
+	//Quit flag
+	bool quit = false;
+	int texW = 0;
+	int texH = 0;
+	//int argc;
+	//char** argv;
+	//Initialize
+	if(init() == false)
+	{
+		return 1;
+	}
+	//Set the background colour
+	SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+	//Renderer the window
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
+	//Render message
+	message = TTF_RenderText_Solid(font, "PonyBrowser", textColour);
+	//Create texture from surface
+	texture = SDL_CreateTextureFromSurface(renderer, message);
+	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+	SDL_Rect dstrect = {0, 0, texW, texH};
+	
+	//If there was an error in rendering text
+	if(message == NULL)
+	{
+		return 1;
+	}
+	//While the user hasn't quit
+	while(quit == false)
+	{
+		//While there's events to handle
+		while(SDL_PollEvent(&event))
+		{
+			//If the user has X out the window
+			if(event.type == SDL_QUIT)
+			{
+				quit = true;
+				break;
+			}
+		}
+		SDL_RenderCopy(renderer,texture, NULL, &dstrect);
+		SDL_RenderPresent(renderer);	
+	}
 
         char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
         getpage(argss);
@@ -1937,11 +1998,13 @@ else
         file = fopen("tmp/page.html","r");
         if(!file)
         {
-                fprintf(stderr, "Count not open %s\n", argv[1]);
+                fprintf(stderr, "Count not open page.html");
                 exit(-1);
         }
         yyin = file;
-yylex();
-SDL_Delay(20000);
+	yylex();
+	clean_up();
+	return 0;
+	
 }
 
