@@ -488,14 +488,14 @@ char *yytext;
 #line 1 "page.l"
 #line 2 "page.l"
 #include <stdio.h>
-#include "getpage.h"
 #include <string.h>
+#include "getpage.h"
+#include "gui.h"
 char *yylval;
 int title=0;
 int yywrap();
 int yywrap() {return 1;}
 char buf[100];
-char titlee[25];
 char *s;
 
 
@@ -856,7 +856,7 @@ case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
 #line 39 "page.l"
-{*s++ = '\n';}
+{}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP

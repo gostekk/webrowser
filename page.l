@@ -1,14 +1,13 @@
 %{
 #include <stdio.h>
-#include "getpage.h"
 #include <string.h>
+#include "getpage.h"
 #include "gui.h"
 char *yylval;
 int title=0;
 int yywrap();
 int yywrap() {return 1;}
 char buf[100];
-char titlee[25];
 char *s;
 %}
 %x STRING
