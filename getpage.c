@@ -9,7 +9,6 @@ void getpage(char **args)
     FILE *fp;
     CURLcode res;
     char *url = args[0], outfile[FILENAME_MAX];
-    printf("%s\n", args[1]);
     strcpy(outfile,args[1]);
     curl = curl_easy_init();
     if (curl)
