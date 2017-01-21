@@ -489,10 +489,14 @@ char *yytext;
 #line 2 "page.l"
 #include <stdio.h>
 #include <string.h>
+#include <SDL2/SDL.h>
 #include "getpage.h"
-#include "gui.h"
+
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 char *yylval;
 int title=0;
+char titlee[50];
 int yywrap();
 int yywrap() {return 1;}
 char buf[100];
@@ -500,7 +504,8 @@ char *s;
 
 
 
-#line 504 "lex.yy.c"
+
+#line 509 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -721,9 +726,9 @@ YY_DECL
 		}
 
 	{
-#line 16 "page.l"
+#line 21 "page.l"
 
-#line 727 "lex.yy.c"
+#line 732 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -782,22 +787,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "page.l"
+#line 22 "page.l"
 { BEGIN STRING; s = buf; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "page.l"
+#line 23 "page.l"
 { BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "page.l"
+#line 24 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "page.l"
+#line 25 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -805,49 +810,49 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 24 "page.l"
+#line 29 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 25 "page.l"
+#line 30 "page.l"
 { s = buf;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 26 "page.l"
+#line 31 "page.l"
 { printf("desu" );*s++ = '\n'; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 27 "page.l"
+#line 32 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "page.l"
+#line 33 "page.l"
 { *s++ = '\n'; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 29 "page.l"
+#line 34 "page.l"
 {   *s = 0;
                 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 32 "page.l"
+#line 37 "page.l"
 { printf("%s", yytext); *s++ = *yytext; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 35 "page.l"
+#line 40 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 36 "page.l"
+#line 41 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
@@ -855,15 +860,15 @@ YY_RULE_SETUP
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 39 "page.l"
+#line 44 "page.l"
 {}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 40 "page.l"
+#line 45 "page.l"
 ECHO;
 	YY_BREAK
-#line 867 "lex.yy.c"
+#line 872 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1867,13 +1872,53 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 40 "page.l"
+#line 45 "page.l"
 
 
 int main(argc, argv)
 int argc;
 char** argv;
 {
+SDL_Window* window = NULL;
+SDL_Surface* screenSurface = NULL;
+SDL_Renderer *renderer = NULL;
+if( SDL_Init( SDL_INIT_VIDEO ) < 0)
+{
+        printf("SDL coult not initalize! SDL_Error: %s\n", SDL_GetError());
+}
+else
+{
+        window = SDL_CreateWindow("PonyBrowser", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        if(window == NULL)
+        {
+                printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        }
+        else
+        {
+		renderer = SDL_CreateRenderer(window, -1, 0);
+		if(renderer == NULL)
+		{
+			printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+		}
+		else
+		{
+			SDL_Event e;
+			do{
+				SDL_WaitEvent(&e);
+				switch(e.type)
+				{
+				case SDL_WINDOWEVENT:
+					SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+					SDL_RenderClear(renderer);
+					SDL_RenderPresent(renderer);
+					break;
+					}
+				}while(e.type != SDL_QUIT);
+				return 0;
+		}
+        }
+}
+
         char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
         getpage(argss);
         FILE *file;
@@ -1885,6 +1930,6 @@ char** argv;
         }
         yyin = file;
 yylex();
-gui();
+SDL_Delay(20000);
 }
 
