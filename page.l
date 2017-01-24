@@ -49,11 +49,10 @@ char *s;
                 }
 <STRING>.       { *s++ = *yytext; }
 <BODY>\<        { s = buf;}
-<BODY>\\n     { printf("desu" );*s++ = '\n'; }
+<BODY>(\/br>)   { printf("</br>");}
+<BODY>(\b>)     { printf("<b>");}
+<BODY>(\/b>)    { printf("</b>");}
 <BODY>(\/body>)  { BEGIN 0;}
-<BODY>(\/br)     { *s++ = '\n'; }
-<BODY>\>      {   *s = 0;
-                }
 
 <BODY>.         { printf("%s", yytext); *s++ = *yytext; }
 
@@ -94,7 +93,7 @@ bool init()
 		return false;
 	}
 	//If everything initalized fine
-	return true;	
+	return true;
 }
 void clean_up()
 {
@@ -107,7 +106,7 @@ void clean_up()
 	//Clean Renderer
 	SDL_DestroyRenderer(renderer);
 	//Clean window
-	SDL_DestroyWindow(window);	
+	SDL_DestroyWindow(window);
 	//Quit SDL_ttf
 	TTF_Quit();
 	//Quit SDL
@@ -122,7 +121,7 @@ bool startWindow(void)
 	int texH = 0;
 
 	if(init() == false)
-	{	
+	{
 		return 1;
 	}
 	//Set the background colour
@@ -159,7 +158,7 @@ bool startWindow(void)
 
 }
 int main()
-{	
+{
         char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
         getpage(argss);
         FILE *file;
@@ -174,5 +173,5 @@ int main()
 	startWindow();
 	clean_up();
 	return 0;
-	
+
 }
