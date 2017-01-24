@@ -32,7 +32,7 @@ int title=0;
 char titlee[50];
 int yywrap();
 int yywrap() {return 1;}
-char buf[100];
+char buf[100],bodyy[4028];
 char *s;
 
 %}
@@ -41,20 +41,15 @@ char *s;
 %x TITLE
 %%
 \<              { BEGIN STRING; s = buf; }
-<STRING>(body>) { BEGIN BODY;}
+<STRING>(body>) { title=0;BEGIN BODY;}
 <STRING>(title>) { BEGIN TITLE;}
 <STRING>\>      {
                   *s = 0;
                   BEGIN 0;
                 }
 <STRING>.       { *s++ = *yytext; }
-<BODY>\<        { s = buf;}
-<BODY>(\/br>)   { printf("</br>");}
-<BODY>(\b>)     { printf("<b>");}
-<BODY>(\/b>)    { printf("</b>");}
-<BODY>(\/body>)  { BEGIN 0;}
-
-<BODY>.         { printf("%s", yytext); *s++ = *yytext; }
+<BODY>"body>"  { BEGIN 0;}
+<BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 
 
 <TITLE>\<[^<]*    { BEGIN 0;}
