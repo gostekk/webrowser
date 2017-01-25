@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 15
-#define YY_END_OF_BUFFER 16
+#define YY_NUM_RULES 11
+#define YY_END_OF_BUFFER 12
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -384,31 +384,30 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[43] =
+static yyconst flex_int16_t yy_accept[36] =
     {   0,
-        0,    0,    0,    0,    0,    0,    0,    0,   16,   15,
-       14,    1,    5,    4,    5,    5,   11,   11,   11,    6,
-       13,   12,    0,    0,    8,    0,   12,    0,    0,    9,
-        0,    0,    0,    0,    0,    7,    2,    0,    0,    3,
-       10,    0
+        0,    0,    0,    0,    0,    0,    0,    0,   12,   11,
+       10,    1,    5,    4,    5,    5,    7,    7,    9,    8,
+        0,    0,    0,    8,    0,    0,    0,    0,    0,    0,
+        2,    0,    6,    3,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    2,    1,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    4,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    5,
-        1,    6,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
+        1,    4,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    7,    1,    8,
+        1,    1,    1,    1,    1,    1,    1,    5,    1,    6,
 
-        9,    1,    1,    1,   10,    1,    1,   11,    1,    1,
-       12,    1,    1,   13,    1,   14,    1,    1,    1,    1,
-       15,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        7,    1,    1,    1,    8,    1,    1,    9,    1,    1,
+       10,    1,    1,    1,    1,   11,    1,    1,    1,    1,
+       12,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -425,50 +424,46 @@ static yyconst YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst YY_CHAR yy_meta[16] =
+static yyconst YY_CHAR yy_meta[13] =
     {   0,
-        1,    1,    1,    1,    2,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
+        1,    1
     } ;
 
-static yyconst flex_uint16_t yy_base[48] =
+static yyconst flex_uint16_t yy_base[41] =
     {   0,
-        0,    1,    4,   16,   29,   33,    9,   10,   43,   55,
-       55,   55,   55,   55,   30,   31,   55,   34,   22,   55,
-       55,    0,   20,   13,   55,   33,    0,   11,   14,   55,
-       16,   15,   14,    8,    1,   55,   55,    3,    2,   55,
-       55,   55,   46,   48,   50,   52,    0
+        0,    2,    4,   14,   24,   28,   32,   34,   28,   46,
+       46,   46,   46,   46,   17,   16,   46,   13,   46,    0,
+       16,   10,   14,    0,    5,    5,    1,    8,    4,    6,
+       46,    3,   46,   46,   46,   37,   39,   41,   43,    0
     } ;
 
-static yyconst flex_int16_t yy_def[48] =
+static yyconst flex_int16_t yy_def[41] =
     {   0,
-       43,   43,   44,   44,   45,   45,   46,   46,   42,   42,
-       42,   42,   42,   42,   42,   42,   42,   42,   42,   42,
-       42,   47,   42,   42,   42,   42,   47,   42,   42,   42,
-       42,   42,   42,   42,   42,   42,   42,   42,   42,   42,
-       42,    0,   42,   42,   42,   42,   42
+       36,   36,   37,   37,   38,   38,   39,   39,   35,   35,
+       35,   35,   35,   35,   35,   35,   35,   35,   35,   40,
+       35,   35,   35,   40,   35,   35,   35,   35,   35,   35,
+       35,   35,   35,   35,    0,   35,   35,   35,   35,   35
     } ;
 
-static yyconst flex_uint16_t yy_nxt[71] =
+static yyconst flex_uint16_t yy_nxt[59] =
     {   0,
-       27,   42,   11,   11,   12,   12,   10,   41,   40,   14,
-       15,   10,   10,   22,   22,   39,   38,   16,   10,   37,
-       36,   14,   15,   35,   34,   33,   29,   28,   26,   16,
-       18,   10,   19,   20,   18,   10,   19,   20,   30,   25,
-       24,   23,   42,   42,   31,   32,   10,   10,   13,   13,
-       17,   17,   21,   21,    9,   42,   42,   42,   42,   42,
-       42,   42,   42,   42,   42,   42,   42,   42,   42,   42
+       24,   11,   12,   11,   12,   10,   34,   14,   15,   33,
+       32,   31,   30,   29,   16,   10,   28,   14,   15,   27,
+       26,   25,   23,   22,   16,   10,   21,   35,   18,   10,
+       35,   35,   18,   10,   20,   10,   20,   10,   10,   13,
+       13,   17,   17,   19,   19,    9,   35,   35,   35,   35,
+       35,   35,   35,   35,   35,   35,   35,   35
     } ;
 
-static yyconst flex_int16_t yy_chk[71] =
+static yyconst flex_int16_t yy_chk[59] =
     {   0,
-       47,    0,    1,    2,    1,    2,    3,   39,   38,    3,
-        3,    7,    8,    7,    8,   35,   34,    3,    4,   33,
-       32,    4,    4,   31,   29,   28,   24,   23,   19,    4,
-        5,    5,    5,    5,    6,    6,    6,    6,   26,   18,
-       16,   15,    9,    0,   26,   26,   43,   43,   44,   44,
-       45,   45,   46,   46,   42,   42,   42,   42,   42,   42,
-       42,   42,   42,   42,   42,   42,   42,   42,   42,   42
+       40,    1,    1,    2,    2,    3,   32,    3,    3,   30,
+       29,   28,   27,   26,    3,    4,   25,    4,    4,   23,
+       22,   21,   18,   16,    4,    5,   15,    9,    5,    6,
+        0,    0,    6,    7,    7,    8,    8,   36,   36,   37,
+       37,   38,   38,   39,   39,   35,   35,   35,   35,   35,
+       35,   35,   35,   35,   35,   35,   35,   35
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -490,43 +485,21 @@ char *yytext;
 // Headers
 #include <stdio.h>
 #include <string.h>
-#include <SDL2/SDL.h>
 #include "getpage.h"
-#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
-
-// Screen attributes
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-const int SCREEN_BPP = 32;
-
-//The surfaces
-SDL_Surface * message = NULL;
-SDL_Window * window = NULL;
-SDL_Renderer * renderer = NULL;
-//The texture
-SDL_Texture * texture = NULL;
-//The event structure
-SDL_Event event;
-
-//Font
-TTF_Font * font = NULL;
-
-//The color of the font
-SDL_Color textColour = {125, 125, 125};
-
-char *yylval;
+#include <gtk/gtk.h>
 int title=0;
 char titlee[50];
 int yywrap();
 int yywrap() {return 1;}
-char buf[100];
+char buf[100],bodyy[4028];
 char *s;
+char *body = NULL;
 
 
 
 
-#line 530 "lex.yy.c"
+#line 503 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -747,9 +720,9 @@ YY_DECL
 		}
 
 	{
-#line 42 "page.l"
+#line 20 "page.l"
 
-#line 753 "lex.yy.c"
+#line 726 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -776,13 +749,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 43 )
+				if ( yy_current_state >= 36 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 55 );
+		while ( yy_base[yy_current_state] != 46 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -808,22 +781,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 43 "page.l"
+#line 21 "page.l"
 { BEGIN STRING; s = buf; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 44 "page.l"
-{ BEGIN BODY;}
+#line 22 "page.l"
+{ title=0;BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 45 "page.l"
+#line 23 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 46 "page.l"
+#line 24 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -831,64 +804,44 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 50 "page.l"
+#line 28 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 51 "page.l"
-{ s = buf;}
+#line 29 "page.l"
+{ BEGIN 0;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 52 "page.l"
-{ printf("</br>");}
+#line 30 "page.l"
+{ bodyy[title]=*yytext;title++; *s++ = *yytext; }
 	YY_BREAK
 case 8:
+/* rule 8 can match eol */
 YY_RULE_SETUP
-#line 53 "page.l"
-{ printf("<b>");}
+#line 33 "page.l"
+{ BEGIN 0;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 54 "page.l"
-{ printf("</b>");}
-	YY_BREAK
-case 10:
-YY_RULE_SETUP
-#line 55 "page.l"
-{ BEGIN 0;}
-	YY_BREAK
-case 11:
-YY_RULE_SETUP
-#line 57 "page.l"
-{ printf("%s", yytext); *s++ = *yytext; }
-	YY_BREAK
-case 12:
-/* rule 12 can match eol */
-YY_RULE_SETUP
-#line 60 "page.l"
-{ BEGIN 0;}
-	YY_BREAK
-case 13:
-YY_RULE_SETUP
-#line 61 "page.l"
+#line 34 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
 	YY_BREAK
-case 14:
-/* rule 14 can match eol */
+case 10:
+/* rule 10 can match eol */
 YY_RULE_SETUP
-#line 64 "page.l"
+#line 37 "page.l"
 {}
 	YY_BREAK
-case 15:
+case 11:
 YY_RULE_SETUP
-#line 65 "page.l"
+#line 38 "page.l"
 ECHO;
 	YY_BREAK
-#line 892 "lex.yy.c"
+#line 845 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1184,7 +1137,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 43 )
+			if ( yy_current_state >= 36 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1212,11 +1165,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 43 )
+		if ( yy_current_state >= 36 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 42);
+	yy_is_jam = (yy_current_state == 35);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1892,107 +1845,25 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 65 "page.l"
+#line 38 "page.l"
 
 
-bool init()
+int main(int argc, char *argv[])
 {
-	//Initialize all SDL subsystems
-	if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
-	{
-		return false;
-	}
-	//Set up the screen
-	window = SDL_CreateWindow("PonyBrowser", 0,0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	//If there was an error in setting up the window
-	if(window == NULL)
-	{
-		return false;
-	}
-	//Initialize SDL_ttf
-	TTF_Init();
-	font = TTF_OpenFont("Ubuntu-BI.ttf", 12);
-	//If there was an error in setting font
-	if(TTF_Init() == -1)
-	{
-		return false;
-	}
-	//Set up the renderer
-	renderer = SDL_CreateRenderer(window, -1, 0);
-	//If there was an error in setting in the renderer
-	if(renderer == NULL)
-	{
-		return false;
-	}
-	//If everything initalized fine
-	return true;
-}
-void clean_up()
-{
-	//Clean the texture
-	SDL_DestroyTexture(texture);
-	//Clean surface
-	SDL_FreeSurface(message);
-	//Close the font
-	TTF_CloseFont(font);
-	//Clean Renderer
-	SDL_DestroyRenderer(renderer);
-	//Clean window
-	SDL_DestroyWindow(window);
-	//Quit SDL_ttf
-	TTF_Quit();
-	//Quit SDL
-	SDL_Quit();
-}
-bool startWindow(void)
-{
-	//Quit flag
-	bool quit = false;
-	//Variables
-	int texW = 0;
-	int texH = 0;
-
-	if(init() == false)
-	{
-		return 1;
-	}
-	//Set the background colour
-	SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-	//Render the window
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
-	//Testing rendering fonts
-	char pony[50] = "pony";
-	//Render message
-	message = TTF_RenderText_Solid(font, pony, textColour);
-	//Create texture from surface
-	texture = SDL_CreateTextureFromSurface(renderer, message);
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = {0, 0, texW, texH};
-	//If there was an error in rendering text
-	if(message == NULL)
-	{
-		return 1;
-	}
-	while(quit == false)
-	{
-		while(SDL_PollEvent(&event))
-		{
-			if(event.type == SDL_QUIT)
-			{
-				quit = true;
-				break;
-			}
-		}
-		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
-		SDL_RenderPresent(renderer);
-	}
-
-}
-int main()
-{
+	GtkWidget *window;
+        GtkWidget *label;
+	
+	gtk_init(&argc, &argv);
+	
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+	gtk_window_set_title(GTK_WINDOW(window), "PonyBrowser");
+	label = gtk_label_new(NULL);
+	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
+	gtk_container_add(GTK_CONTAINER(window), label);
+	gtk_widget_show(label);
         char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
-        getpage(argss);
+        //getpage(argss);
         FILE *file;
         file = fopen("tmp/page.html","r");
         if(!file)
@@ -2002,9 +1873,15 @@ int main()
         }
         yyin = file;
 	yylex();
-	startWindow();
-	clean_up();
+	for(int i = 0; i < (sizeof(bodyy) / sizeof(bodyy[0])); i++)
+	{
+		char *str =*yytext;
+		printf("%s", str);
+		//gtk_label_set_markup(GTK_LABEL(label), str);
+	}
+	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	gtk_widget_show(window);
+	gtk_main();
 	return 0;
-
 }
 

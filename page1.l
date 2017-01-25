@@ -5,13 +5,14 @@
 #include "getpage.h"
 #include <stdbool.h>
 #include <gtk/gtk.h>
-int title=0;
+
+char *yylval;
+int title=0,body_len=0;
 char titlee[50];
 int yywrap();
 int yywrap() {return 1;}
-char buf[100],bodyy[4028];
+char buf[100],body[4096];
 char *s;
-char *body = NULL;
 
 %}
 %x STRING
@@ -19,15 +20,17 @@ char *body = NULL;
 %x TITLE
 %%
 \<              { BEGIN STRING; s = buf; }
-<STRING>(body>) { title=0;BEGIN BODY;}
+<STRING>(body>) { BEGIN BODY;}
 <STRING>(title>) { BEGIN TITLE;}
 <STRING>\>      {
                   *s = 0;
                   BEGIN 0;
                 }
 <STRING>.       { *s++ = *yytext; }
-<BODY>"body>"  { BEGIN 0;}
-<BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
+<BODY>\<        { s = buf;}
+<BODY>(\/body>)  { BEGIN 0;}
+
+<BODY>.         { body[body_len]=*yytext; body_len++; *s++ = *yytext; }
 
 
 <TITLE>\<[^<]*    { BEGIN 0;}
@@ -36,22 +39,14 @@ char *body = NULL;
                   }
 \n                {}
 %%
-int main(int argc, char *argv[])
+int main()
 {
 	GtkWidget *window;
-        GtkWidget *label;
-	
-	gtk_init(&argc, &argv);
-	
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-	gtk_window_set_title(GTK_WINDOW(window), "PonyBrowser");
-	label = gtk_label_new(NULL);
-	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
-	gtk_container_add(GTK_CONTAINER(window), label);
-	gtk_widget_show(label);
+	GtkWidget *textView;
+	GtkTextBuffer *buffer;
+	GtkTextIter iter;
         char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
-        //getpage(argss);
+        getpage(argss);
         FILE *file;
         file = fopen("tmp/page.html","r");
         if(!file)
@@ -61,14 +56,18 @@ int main(int argc, char *argv[])
         }
         yyin = file;
 	yylex();
-	for(int i = 0; i < (sizeof(bodyy) / sizeof(bodyy[0])); i++)
-	{
-		char *str =*yytext;
-		printf("%s", str);
-		//gtk_label_set_markup(GTK_LABEL(label), str);
-	}
-	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-	gtk_widget_show(window);
+	gtk_init();
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+	gtk_window_set_default_size(GTK_WINDOW(window), 250, 200);
+	gtk_window_set_title(GTK_WINDOW(window), "PonyBrowser");
+	gtk_container_set_border_width(GTK_CONTAINER(window), 5);
+	GTK_WINDOW(window)->allow_shrink = TRUE;
+	textView = gtk_text_view_new();
+	gtk_container_add(GTK_CONTAINER(window), textView);
+	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	gtk_widget_show_all(window);
 	gtk_main();
 	return 0;
+	
 }
