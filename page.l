@@ -27,7 +27,8 @@ char *body = NULL;
                   BEGIN 0;
                 }
 <STRING>.       { *s++ = *yytext; }
-<BODY>"/body>"  { printf("%s\n",bodyy );BEGIN 0;}
+<BODY>\<"/body>"  { BEGIN 0;}
+<BODY>\\n      { bodyy[title]='\n';title++; *s++ = *yytext;}
 <BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 
 
