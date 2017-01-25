@@ -17,7 +17,7 @@ char buf[100];
 char *s;
 gchar bodyy[1024];
 char *body = NULL;
-char version[1024] = "v.0.0.1 Alpha";
+char version[64] = "v.0.1 Alpha";
 // Content of help
 static char const * const option_help[] =
 {
@@ -32,6 +32,7 @@ static char const * const option_help[] =
  */
 static struct option const long_options[] =
 {
+  {"version", 0, 0, 'v'},
   {"help", 0, 0, 'h'},
   {0, 0, 0, 0}
 };
@@ -71,6 +72,16 @@ void usage()
   printf ("\nIf url is `-', read standard input.\n");
 }
 
+/*! \brief Funkcja wyświetla aktualna wersje programu.
+ *
+ *
+ */
+void pversion()
+{
+  printf ("PonyBrowser\nVersion: %s\n", version);
+  exit(-1);
+}
+
 /*! \brief Funkcja (wyświetla błąd)* oraz podpowiedz użycia pomocy.
  *
  *  Funcja wyświetla aktualny błąd jeżeli takowy wystąpił oraz podpowiedz użycia komendy wyświetlającej pomoc.
@@ -89,11 +100,14 @@ int main(int argc, char *argv[])
   opterr = 0;
 
   while ((c = getopt_long (argc, argv,
-          "h",
+          "vh",
           long_options, 0)) != EOF){
 
     switch (c)
     {
+      case 'v':
+        pversion();
+
       case 'h':
         usage();
         exit (0);

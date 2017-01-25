@@ -504,6 +504,7 @@ char buf[100];
 char *s;
 gchar bodyy[1024];
 char *body = NULL;
+char version[64] = "v.0.1 Alpha";
 // Content of help
 static char const * const option_help[] =
 {
@@ -518,13 +519,14 @@ static char const * const option_help[] =
  */
 static struct option const long_options[] =
 {
+  {"version", 0, 0, 'v'},
   {"help", 0, 0, 'h'},
   {0, 0, 0, 0}
 };
 
 
 
-#line 528 "lex.yy.c"
+#line 530 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -745,9 +747,9 @@ YY_DECL
 		}
 
 	{
-#line 41 "page.l"
+#line 43 "page.l"
 
-#line 751 "lex.yy.c"
+#line 753 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -806,22 +808,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "page.l"
+#line 44 "page.l"
 { BEGIN STRING; s = buf;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 43 "page.l"
+#line 45 "page.l"
 { title=0;BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 44 "page.l"
+#line 46 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "page.l"
+#line 47 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -829,33 +831,33 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 49 "page.l"
+#line 51 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 50 "page.l"
+#line 52 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 51 "page.l"
+#line 53 "page.l"
 { *s++ = *yytext;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 52 "page.l"
+#line 54 "page.l"
 { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 55 "page.l"
+#line 57 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 56 "page.l"
+#line 58 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
@@ -863,15 +865,15 @@ YY_RULE_SETUP
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 59 "page.l"
+#line 61 "page.l"
 {}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 60 "page.l"
+#line 62 "page.l"
 ECHO;
 	YY_BREAK
-#line 875 "lex.yy.c"
+#line 877 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1875,7 +1877,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 60 "page.l"
+#line 62 "page.l"
 
 
 /*! \brief Funkcja wyświetla zawartość pomocy.
@@ -1888,6 +1890,12 @@ void usage()
   for (int i=0 ; option_help[i] != 0; i++)
     printf ("  %s\n", option_help[i]);
   printf ("\nIf url is `-', read standard input.\n");
+}
+
+void pversion()
+{
+  printf ("\nVersion: %s\n", version);
+  exit(-1);
 }
 
 /*! \brief Funkcja (wyświetla błąd)* oraz podpowiedz użycia pomocy.
@@ -1908,11 +1916,14 @@ int main(int argc, char *argv[])
   opterr = 0;
 
   while ((c = getopt_long (argc, argv,
-          "h",
+          "vh",
           long_options, 0)) != EOF){
 
     switch (c)
     {
+      case 'v':
+        pversion();
+
       case 'h':
         usage();
         exit (0);
