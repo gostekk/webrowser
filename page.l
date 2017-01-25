@@ -52,10 +52,10 @@ int main(int argc, char *argv[])
 	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
 	gtk_container_add(GTK_CONTAINER(window), label);
 	gtk_widget_show(label);
-        //char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
-        //getpage(argss);
+        char *argss[] = { argv[1], "tmp/page.html"};
+        getpage(argss);
         FILE *file;
-        file = fopen("page.html","r");
+        file = fopen("tmp/page.html","r");
         if(!file)
         {
                 fprintf(stderr, "Count not open page.html");
@@ -64,13 +64,8 @@ int main(int argc, char *argv[])
         yyin = file;
 	yylex();
 
-  //strcpy(bodyy, "<b>Tekst</b>ehh ");
-
-	//for(int i = 0; i < (sizeof(bodyy) / sizeof(bodyy[0])); i++)
-	//{
-
 	gtk_label_set_markup(GTK_LABEL(label), bodyy);
-	//}
+
 	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_widget_show(window);
 	gtk_main();
