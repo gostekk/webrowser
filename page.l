@@ -9,8 +9,9 @@ int title=0;
 char titlee[50];
 int yywrap();
 int yywrap() {return 1;}
-char buf[100],bodyy[4028];
+char buf[100];
 char *s;
+gchar bodyy[1024];
 char *body = NULL;
 
 %}
@@ -18,7 +19,7 @@ char *body = NULL;
 %x BODY
 %x TITLE
 %%
-\<              { BEGIN STRING; s = buf; }
+\<              { BEGIN STRING; s = buf;}
 <STRING>(body>) { title=0;BEGIN BODY;}
 <STRING>(title>) { BEGIN TITLE;}
 <STRING>\>      {
@@ -26,7 +27,7 @@ char *body = NULL;
                   BEGIN 0;
                 }
 <STRING>.       { *s++ = *yytext; }
-<BODY>"body>"  { BEGIN 0;}
+<BODY>"/body>"  { printf("%s\n",bodyy );BEGIN 0;}
 <BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 
 
@@ -38,11 +39,11 @@ char *body = NULL;
 %%
 int main(int argc, char *argv[])
 {
-	GtkWidget *window;
-        GtkWidget *label;
-	
+  GtkWidget *window;
+  GtkWidget *label;
+
 	gtk_init(&argc, &argv);
-	
+
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(window), "PonyBrowser");
@@ -50,10 +51,10 @@ int main(int argc, char *argv[])
 	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
 	gtk_container_add(GTK_CONTAINER(window), label);
 	gtk_widget_show(label);
-        char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
+        //char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
         //getpage(argss);
         FILE *file;
-        file = fopen("tmp/page.html","r");
+        file = fopen("page.html","r");
         if(!file)
         {
                 fprintf(stderr, "Count not open page.html");
@@ -61,12 +62,14 @@ int main(int argc, char *argv[])
         }
         yyin = file;
 	yylex();
-	for(int i = 0; i < (sizeof(bodyy) / sizeof(bodyy[0])); i++)
-	{
-		char *str =*yytext;
-		printf("%s", str);
-		//gtk_label_set_markup(GTK_LABEL(label), str);
-	}
+
+  //strcpy(bodyy, "<b>Tekst</b>ehh ");
+
+	//for(int i = 0; i < (sizeof(bodyy) / sizeof(bodyy[0])); i++)
+	//{
+
+	gtk_label_set_markup(GTK_LABEL(label), bodyy);
+	//}
 	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_widget_show(window);
 	gtk_main();
