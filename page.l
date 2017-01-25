@@ -4,7 +4,11 @@
 #include <string.h>
 #include "getpage.h"
 #include <stdbool.h>
+#include <getopt.h>
+#include <ctype.h> // library with isprint()
 #include <gtk/gtk.h>
+
+char program_name[20]; /*!< Nazwa wywołanego programu */
 int title=0;
 gchar titlee[50];
 int yywrap();
@@ -13,7 +17,23 @@ char buf[100];
 char *s;
 gchar bodyy[1024];
 char *body = NULL;
+// Content of help
+static char const * const option_help[] =
+{
+"-v  --version  Show version of program.",
+"--help  Output this help.",
+0
+};
 
+/*! \brief Struktura zawierająca opcje programu.
+ *
+ *  Funcja zawierająca długie opcje pliku wywoływane przy pomocy podwójnego myślnika na przykład:--show-all .
+ */
+static struct option const long_options[] =
+{
+  {"help", 0, 0, 'h'},
+  {0, 0, 0, 0}
+};
 %}
 %x STRING
 %x BODY
@@ -38,8 +58,78 @@ char *body = NULL;
                   }
 \n                {}
 %%
+/*! \brief Funkcja wyświetla zawartość pomocy.
+ *
+ *  Funcja uruchamiana gdy użytkownik wpisze --help lub -h, wyświetla ona zawartość pomocy oraz przykładowe użycie.
+ */
+void usage()
+{
+  printf ("Usage: %s [OPTION]... [URL]\n\n", program_name);
+  for (int i=0 ; option_help[i] != 0; i++)
+    printf ("  %s\n", option_help[i]);
+  printf ("\nIf url is `-', read standard input.\n");
+}
+
+/*! \brief Funkcja (wyświetla błąd)* oraz podpowiedz użycia pomocy.
+ *
+ *  Funcja wyświetla aktualny błąd jeżeli takowy wystąpił oraz podpowiedz użycia komendy wyświetlającej pomoc.
+ */
+static void try_help (char const *reason)
+{
+  if (reason)
+    fprintf (stderr, "%s \n", reason);
+  printf ("Try `%s --help' for more information.\n", program_name);
+  exit(EXIT_FAILURE);
+}
 int main(int argc, char *argv[])
 {
+  int c;
+  strcpy(program_name,argv[0]);
+  opterr = 0;
+
+  while ((c = getopt_long (argc, argv,
+          "h",
+          long_options, 0)) != EOF){
+
+    switch (c)
+    {
+      case 'h':
+        usage();
+        exit (0);
+
+      case '?':
+        if (optopt == 'c'){
+          fprintf (stderr, "Option -%c requires an argument.\n", optopt);
+          try_help(0);
+        }
+        else if (isprint (optopt)){
+          fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+          try_help(0);
+        }
+        else {
+          fprintf (stderr,
+                    "Unknown option character `\\x%x'.\n",
+                    optopt);
+          try_help(0);
+        }
+        return 1;
+
+        default:
+          try_help (0);
+      }
+  }
+
+  if (optind >= argc) {
+    try_help("Expected page address after options");
+  }
+  else if (argc - optind < 1){
+    try_help("Insert page address");
+  }
+  else if (argc - optind > 1){
+    try_help("Too much arguments");
+  }
+  else{
+
   GtkWidget *window;
   GtkWidget *label;
 
@@ -70,4 +160,5 @@ int main(int argc, char *argv[])
 	gtk_widget_show(window);
 	gtk_main();
 	return 0;
+}
 }
