@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <gtk/gtk.h>
 int title=0;
-char titlee[50];
+gchar titlee[50];
 int yywrap();
 int yywrap() {return 1;}
 char buf[100];
@@ -28,7 +28,7 @@ char *body = NULL;
                 }
 <STRING>.       { *s++ = *yytext; }
 <BODY>\<"/body>"  { BEGIN 0;}
-<BODY>\\n      { bodyy[title]='\n';title++; *s++ = *yytext;}
+<BODY>\\n      { *s++ = *yytext;}
 <BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 
 
