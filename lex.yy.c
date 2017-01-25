@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 11
-#define YY_END_OF_BUFFER 12
+#define YY_NUM_RULES 12
+#define YY_END_OF_BUFFER 13
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -384,12 +384,12 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[36] =
+static yyconst flex_int16_t yy_accept[40] =
     {   0,
-        0,    0,    0,    0,    0,    0,    0,    0,   12,   11,
-       10,    1,    5,    4,    5,    5,    7,    7,    9,    8,
-        0,    0,    0,    8,    0,    0,    0,    0,    0,    0,
-        2,    0,    6,    3,    0
+        0,    0,    0,    0,    0,    0,    0,    0,   13,   12,
+       11,    1,    5,    4,    5,    5,    8,    8,    8,   10,
+        9,    0,    0,    0,    7,    9,    0,    0,    0,    0,
+        0,    0,    2,    0,    0,    3,    0,    6,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
@@ -398,16 +398,16 @@ static yyconst YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    3,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    4,
+        1,    5,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
-        1,    4,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    5,    1,    6,
+        1,    6,    1,    1,    1,    1,    1,    7,    1,    8,
 
-        7,    1,    1,    1,    8,    1,    1,    9,    1,    1,
-       10,    1,    1,    1,    1,   11,    1,    1,    1,    1,
-       12,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        9,    1,    1,    1,   10,    1,    1,   11,    1,   12,
+       13,    1,    1,    1,    1,   14,    1,    1,    1,    1,
+       15,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -424,46 +424,50 @@ static yyconst YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst YY_CHAR yy_meta[13] =
+static yyconst YY_CHAR yy_meta[16] =
     {   0,
-        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
-        1,    1
+        1,    1,    1,    2,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_uint16_t yy_base[41] =
+static yyconst flex_uint16_t yy_base[45] =
     {   0,
-        0,    2,    4,   14,   24,   28,   32,   34,   28,   46,
-       46,   46,   46,   46,   17,   16,   46,   13,   46,    0,
-       16,   10,   14,    0,    5,    5,    1,    8,    4,    6,
-       46,    3,   46,   46,   46,   37,   39,   41,   43,    0
+        0,    1,    4,   17,   30,   35,    6,   10,   40,   50,
+       50,   50,   50,   50,   25,   25,   50,   30,   18,   50,
+        0,   21,   14,   20,   50,    0,   11,   14,   10,   16,
+       11,    9,   50,   11,    0,   50,    2,   50,   50,   41,
+       43,   45,   47,    0
     } ;
 
-static yyconst flex_int16_t yy_def[41] =
+static yyconst flex_int16_t yy_def[45] =
     {   0,
-       36,   36,   37,   37,   38,   38,   39,   39,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35,   35,   40,
-       35,   35,   35,   40,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,    0,   35,   35,   35,   35,   35
+       40,   40,   41,   41,   42,   42,   43,   43,   39,   39,
+       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
+       44,   39,   39,   39,   39,   44,   39,   39,   39,   39,
+       39,   39,   39,   39,   39,   39,   39,   39,    0,   39,
+       39,   39,   39,   39
     } ;
 
-static yyconst flex_uint16_t yy_nxt[59] =
+static yyconst flex_uint16_t yy_nxt[66] =
     {   0,
-       24,   11,   12,   11,   12,   10,   34,   14,   15,   33,
-       32,   31,   30,   29,   16,   10,   28,   14,   15,   27,
-       26,   25,   23,   22,   16,   10,   21,   35,   18,   10,
-       35,   35,   18,   10,   20,   10,   20,   10,   10,   13,
-       13,   17,   17,   19,   19,    9,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35
+       26,   11,   11,   12,   12,   10,   38,   10,   14,   21,
+       15,   10,   39,   21,   37,   36,   35,   16,   10,   34,
+       33,   14,   32,   15,   31,   30,   29,   28,   27,   25,
+       16,   10,   24,   18,   23,   19,   10,   22,   18,   39,
+       19,   10,   10,   13,   13,   17,   17,   20,   20,    9,
+       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
+       39,   39,   39,   39,   39
     } ;
 
-static yyconst flex_int16_t yy_chk[59] =
+static yyconst flex_int16_t yy_chk[66] =
     {   0,
-       40,    1,    1,    2,    2,    3,   32,    3,    3,   30,
-       29,   28,   27,   26,    3,    4,   25,    4,    4,   23,
-       22,   21,   18,   16,    4,    5,   15,    9,    5,    6,
-        0,    0,    6,    7,    7,    8,    8,   36,   36,   37,
-       37,   38,   38,   39,   39,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35
+       44,    1,    2,    1,    2,    3,   37,    7,    3,    7,
+        3,    8,    0,    8,   35,   34,   32,    3,    4,   31,
+       30,    4,   29,    4,   28,   27,   24,   23,   22,   19,
+        4,    5,   18,    5,   16,    5,    6,   15,    6,    9,
+        6,   40,   40,   41,   41,   42,   42,   43,   43,   39,
+       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
+       39,   39,   39,   39,   39
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -487,19 +491,40 @@ char *yytext;
 #include <string.h>
 #include "getpage.h"
 #include <stdbool.h>
+#include <getopt.h>
+#include <ctype.h> // library with isprint()
 #include <gtk/gtk.h>
+
+char program_name[20]; /*!< Nazwa wywołanego programu */
 int title=0;
-char titlee[50];
+gchar titlee[50];
 int yywrap();
 int yywrap() {return 1;}
-char buf[100],bodyy[4028];
+char buf[100];
 char *s;
+gchar bodyy[1024];
 char *body = NULL;
+// Content of help
+static char const * const option_help[] =
+{
+"-v  --version  Show version of program.",
+"--help  Output this help.",
+0
+};
+
+/*! \brief Struktura zawierająca opcje programu.
+ *
+ *  Funcja zawierająca długie opcje pliku wywoływane przy pomocy podwójnego myślnika na przykład:--show-all .
+ */
+static struct option const long_options[] =
+{
+  {"help", 0, 0, 'h'},
+  {0, 0, 0, 0}
+};
 
 
 
-
-#line 503 "lex.yy.c"
+#line 528 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -720,9 +745,9 @@ YY_DECL
 		}
 
 	{
-#line 20 "page.l"
+#line 41 "page.l"
 
-#line 726 "lex.yy.c"
+#line 751 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -749,13 +774,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 36 )
+				if ( yy_current_state >= 40 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 46 );
+		while ( yy_base[yy_current_state] != 50 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -781,22 +806,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 21 "page.l"
-{ BEGIN STRING; s = buf; }
+#line 42 "page.l"
+{ BEGIN STRING; s = buf;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 22 "page.l"
+#line 43 "page.l"
 { title=0;BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "page.l"
+#line 44 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 24 "page.l"
+#line 45 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -804,44 +829,49 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 28 "page.l"
+#line 49 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 29 "page.l"
+#line 50 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 30 "page.l"
-{ bodyy[title]=*yytext;title++; *s++ = *yytext; }
+#line 51 "page.l"
+{ *s++ = *yytext;}
 	YY_BREAK
 case 8:
-/* rule 8 can match eol */
 YY_RULE_SETUP
-#line 33 "page.l"
-{ BEGIN 0;}
+#line 52 "page.l"
+{ bodyy[title]=*yytext;title++; *s++ = *yytext; }
 	YY_BREAK
 case 9:
+/* rule 9 can match eol */
 YY_RULE_SETUP
-#line 34 "page.l"
+#line 55 "page.l"
+{ BEGIN 0;}
+	YY_BREAK
+case 10:
+YY_RULE_SETUP
+#line 56 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
 	YY_BREAK
-case 10:
-/* rule 10 can match eol */
+case 11:
+/* rule 11 can match eol */
 YY_RULE_SETUP
-#line 37 "page.l"
+#line 59 "page.l"
 {}
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 38 "page.l"
+#line 60 "page.l"
 ECHO;
 	YY_BREAK
-#line 845 "lex.yy.c"
+#line 875 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1137,7 +1167,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 36 )
+			if ( yy_current_state >= 40 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1165,11 +1195,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 36 )
+		if ( yy_current_state >= 40 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 35);
+	yy_is_jam = (yy_current_state == 39);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1845,25 +1875,97 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 38 "page.l"
+#line 60 "page.l"
 
 
+/*! \brief Funkcja wyświetla zawartość pomocy.
+ *
+ *  Funcja uruchamiana gdy użytkownik wpisze --help lub -h, wyświetla ona zawartość pomocy oraz przykładowe użycie.
+ */
+void usage()
+{
+  printf ("Usage: %s [OPTION]... [URL]\n\n", program_name);
+  for (int i=0 ; option_help[i] != 0; i++)
+    printf ("  %s\n", option_help[i]);
+  printf ("\nIf url is `-', read standard input.\n");
+}
+
+/*! \brief Funkcja (wyświetla błąd)* oraz podpowiedz użycia pomocy.
+ *
+ *  Funcja wyświetla aktualny błąd jeżeli takowy wystąpił oraz podpowiedz użycia komendy wyświetlającej pomoc.
+ */
+static void try_help (char const *reason)
+{
+  if (reason)
+    fprintf (stderr, "%s \n", reason);
+  printf ("Try `%s --help' for more information.\n", program_name);
+  exit(EXIT_FAILURE);
+}
 int main(int argc, char *argv[])
 {
-	GtkWidget *window;
-        GtkWidget *label;
-	
+  int c;
+  strcpy(program_name,argv[0]);
+  opterr = 0;
+
+  while ((c = getopt_long (argc, argv,
+          "h",
+          long_options, 0)) != EOF){
+
+    switch (c)
+    {
+      case 'h':
+        usage();
+        exit (0);
+
+      case '?':
+        if (optopt == 'c'){
+          fprintf (stderr, "Option -%c requires an argument.\n", optopt);
+          try_help(0);
+        }
+        else if (isprint (optopt)){
+          fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+          try_help(0);
+        }
+        else {
+          fprintf (stderr,
+                    "Unknown option character `\\x%x'.\n",
+                    optopt);
+          try_help(0);
+        }
+        return 1;
+
+        default:
+          try_help (0);
+      }
+  }
+
+  if (optind >= argc) {
+    try_help("Expected page address after options");
+  }
+  else if (argc - optind < 1){
+    try_help("Insert page address");
+  }
+  else if (argc - optind > 1){
+    try_help("Too much arguments");
+  }
+  else{
+
+  GtkWidget *window;
+  GtkWidget *label;
+
 	gtk_init(&argc, &argv);
-	
+
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(window), "PonyBrowser");
 	label = gtk_label_new(NULL);
 	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
+	gtk_label_set_yalign(GTK_LABEL(label), 0);
+	gtk_label_set_xalign(GTK_LABEL(label), 0);
 	gtk_container_add(GTK_CONTAINER(window), label);
 	gtk_widget_show(label);
-        char *argss[] = { "http://91.188.125.49/index.html", "tmp/page.html"};
-        //getpage(argss);
+        char *argss[] = { argv[1], "tmp/page.html"};
+        getpage(argss);
         FILE *file;
         file = fopen("tmp/page.html","r");
         if(!file)
@@ -1873,15 +1975,13 @@ int main(int argc, char *argv[])
         }
         yyin = file;
 	yylex();
-	for(int i = 0; i < (sizeof(bodyy) / sizeof(bodyy[0])); i++)
-	{
-		char *str =*yytext;
-		printf("%s", str);
-		//gtk_label_set_markup(GTK_LABEL(label), str);
-	}
+
+	gtk_label_set_markup(GTK_LABEL(label), bodyy);
+
 	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_widget_show(window);
 	gtk_main();
 	return 0;
+}
 }
 

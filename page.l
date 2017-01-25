@@ -17,6 +17,7 @@ char buf[100];
 char *s;
 gchar bodyy[1024];
 char *body = NULL;
+char version[1024] = "v.0.0.1 Alpha";
 // Content of help
 static char const * const option_help[] =
 {
@@ -140,6 +141,8 @@ int main(int argc, char *argv[])
 	gtk_window_set_title(GTK_WINDOW(window), "PonyBrowser");
 	label = gtk_label_new(NULL);
 	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
+	gtk_label_set_yalign(GTK_LABEL(label), 0);
+	gtk_label_set_xalign(GTK_LABEL(label), 0);
 	gtk_container_add(GTK_CONTAINER(window), label);
 	gtk_widget_show(label);
         char *argss[] = { argv[1], "tmp/page.html"};
