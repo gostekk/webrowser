@@ -497,14 +497,14 @@ char *yytext;
 
 char program_name[20]; /*!< Nazwa wywołanego programu */
 int title=0;
-gchar titlee[50];
-int yywrap();
+char titlee[50]; /*!< Zmienna odpowiadajaca za tytul strony */
+//int yywrap();
 int yywrap() {return 1;}
 char buf[100];
 char *s;
-gchar bodyy[1024];
+char bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
 char *body = NULL;
-char version[64] = "v.0.1 Alpha";
+char version[64] = "v.0.1 Alpha"; /*!< Aktualna wersja programu */
 // Content of help
 static char const * const option_help[] =
 {
@@ -523,10 +523,11 @@ static struct option const long_options[] =
   {"help", 0, 0, 'h'},
   {0, 0, 0, 0}
 };
+// Parsing of file
 
 
 
-#line 530 "lex.yy.c"
+#line 531 "lex.yy.c"
 
 #define INITIAL 0
 #define STRING 1
@@ -747,9 +748,9 @@ YY_DECL
 		}
 
 	{
-#line 43 "page.l"
+#line 44 "page.l"
 
-#line 753 "lex.yy.c"
+#line 754 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -808,22 +809,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 44 "page.l"
+#line 45 "page.l"
 { BEGIN STRING; s = buf;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 45 "page.l"
+#line 46 "page.l"
 { title=0;BEGIN BODY;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 46 "page.l"
+#line 47 "page.l"
 { BEGIN TITLE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 47 "page.l"
+#line 48 "page.l"
 {
                   *s = 0;
                   BEGIN 0;
@@ -831,33 +832,33 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 51 "page.l"
+#line 52 "page.l"
 { *s++ = *yytext; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 52 "page.l"
+#line 53 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 53 "page.l"
+#line 54 "page.l"
 { *s++ = *yytext;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 54 "page.l"
+#line 55 "page.l"
 { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 57 "page.l"
+#line 58 "page.l"
 { BEGIN 0;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 58 "page.l"
+#line 59 "page.l"
 { titlee[title]=*yytext;
                   title++;
                   }
@@ -865,15 +866,15 @@ YY_RULE_SETUP
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 61 "page.l"
+#line 62 "page.l"
 {}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 62 "page.l"
+#line 63 "page.l"
 ECHO;
 	YY_BREAK
-#line 877 "lex.yy.c"
+#line 878 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 case YY_STATE_EOF(BODY):
@@ -1877,7 +1878,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 62 "page.l"
+#line 63 "page.l"
 
 
 /*! \brief Funkcja wyświetla zawartość pomocy.
@@ -1892,9 +1893,13 @@ void usage()
   printf ("\nIf url is `-', read standard input.\n");
 }
 
+/*! \brief Funkcja wyświetla aktualna wersje programu.
+ *
+ *
+ */
 void pversion()
 {
-  printf ("\nVersion: %s\n", version);
+  printf ("PonyBrowser\nVersion: %s\n", version);
   exit(-1);
 }
 
@@ -1909,6 +1914,10 @@ static void try_help (char const *reason)
   printf ("Try `%s --help' for more information.\n", program_name);
   exit(EXIT_FAILURE);
 }
+/*! \brief Glowna funkcja odpowiadajaca za GUI oraz parsowanie pliku.
+ *
+ * Funkcja powoduje powstanie glownego okna programu oraz wywolanie na nim sparsowanej strony.
+ */
 int main(int argc, char *argv[])
 {
   int c;
@@ -1964,7 +1973,7 @@ int main(int argc, char *argv[])
   GtkWidget *window;
   GtkWidget *label;
 
-	gtk_init(&argc, &argv);
+  gtk_init(&argc, &argv);
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);

@@ -10,14 +10,14 @@
 
 char program_name[20]; /*!< Nazwa wywołanego programu */
 int title=0;
-gchar titlee[50]; /*!< Zmienna odpowiadajaca za tytul strony */
-//int yywrap();
+char titlee[50]; /*!< Zmienna odpowiadajaca za tytul strony */
+int yywrap();
 int yywrap() {return 1;}
 char buf[100];
 char *s;
-gchar bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
+char bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
 char *body = NULL;
-char version[64] = "v.0.1 Alpha"; /*~< Aktualna wersja programu */
+char version[64] = "v.0.1 Alpha"; /*!< Aktualna wersja programu */
 // Content of help
 static char const * const option_help[] =
 {
