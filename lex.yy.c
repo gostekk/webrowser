@@ -544,16 +544,12 @@ char *yytext;
 #include <getopt.h>
 #include <ctype.h> // library with isprint()
 #include <gtk/gtk.h>
+#include <glib.h>
 
 char program_name[20]; /*!< Nazwa wywołanego programu */
-int title=0;
-char titlee[50]; /*!< Zmienna odpowiadajaca za tytul strony */
 int yywrap();
 int yywrap() {return 1;}
-char buf[100];
-char *s;
-char bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
-char *body = NULL;
+gchar bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
 char version[64] = "v.0.1 Alpha"; /*!< Aktualna wersja programu */
 // Content of help
 static char const * const option_help[] =
@@ -574,9 +570,9 @@ static struct option const long_options[] =
   {0, 0, 0, 0}
 };
 // Parsing of file
-#line 577 "lex.yy.c"
+#line 573 "lex.yy.c"
 
-#line 579 "lex.yy.c"
+#line 575 "lex.yy.c"
 
 #define INITIAL 0
 #define BODY 1
@@ -794,9 +790,9 @@ YY_DECL
 		}
 
 	{
-#line 42 "page.l"
+#line 38 "page.l"
 
-#line 799 "lex.yy.c"
+#line 795 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -855,48 +851,48 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 43 "page.l"
+#line 39 "page.l"
 { BEGIN BODY;}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 44 "page.l"
+#line 40 "page.l"
 ;
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 45 "page.l"
+#line 41 "page.l"
 {;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 46 "page.l"
+#line 42 "page.l"
 {BEGIN 0;}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 47 "page.l"
+#line 43 "page.l"
 ;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 48 "page.l"
+#line 44 "page.l"
 {strcat(bodyy, "\n");}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 49 "page.l"
+#line 45 "page.l"
 {strcat(bodyy,yytext);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 50 "page.l"
+#line 46 "page.l"
 ECHO;
 	YY_BREAK
-#line 899 "lex.yy.c"
+#line 895 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(BODY):
 	yyterminate();
@@ -1898,7 +1894,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 50 "page.l"
+#line 46 "page.l"
 
 /*! \brief Funkcja wyświetla zawartość pomocy.
  *
@@ -2016,9 +2012,9 @@ int main(int argc, char *argv[])
 	yylex();
 
 	gtk_label_set_markup(GTK_LABEL(label), bodyy);
-
-	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	
 	gtk_widget_show(window);
+	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_main();
 	return 0;
 }

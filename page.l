@@ -7,16 +7,12 @@
 #include <getopt.h>
 #include <ctype.h> // library with isprint()
 #include <gtk/gtk.h>
+#include <glib.h>
 
 char program_name[20]; /*!< Nazwa wywołanego programu */
-int title=0;
-char titlee[50]; /*!< Zmienna odpowiadajaca za tytul strony */
 int yywrap();
 int yywrap() {return 1;}
-char buf[100];
-char *s;
-char bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
-char *body = NULL;
+gchar bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
 char version[64] = "v.0.1 Alpha"; /*!< Aktualna wersja programu */
 // Content of help
 static char const * const option_help[] =
@@ -164,9 +160,9 @@ int main(int argc, char *argv[])
 	yylex();
 
 	gtk_label_set_markup(GTK_LABEL(label), bodyy);
-
-	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+	
 	gtk_widget_show(window);
+	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_main();
 	return 0;
 }
