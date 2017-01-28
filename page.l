@@ -51,7 +51,7 @@ static struct option const long_options[] =
                 }
 <STRING>.       { *s++ = *yytext; }
 <BODY>\<"/body>"  { BEGIN 0;}
-<BODY>\\n      { *s++ = *yytext;}
+<BODY>\n      { *s++ = *yytext;}
 <BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
 
 
