@@ -13,7 +13,7 @@ char program_name[20]; /*!< Nazwa wywołanego programu */
 int yywrap();
 int yywrap() {return 1;}
 gchar bodyy[1024]; /*!< Zmienna odpowiadajaca za glowna czesc strony */
-char version[64] = "v.0.1 Alpha"; /*!< Aktualna wersja programu */
+char version[64] = "v.0.2 Alpha"; /*!< Aktualna wersja programu */
 // Content of help
 static char const * const option_help[] =
 {
