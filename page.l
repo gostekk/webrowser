@@ -38,28 +38,14 @@ static struct option const long_options[] =
 };
 // Parsing of file
 %}
-%x STRING
 %x BODY
-%x TITLE
 %%
-\<              { BEGIN STRING; s = buf;}
-<STRING>(body>) { title=0;BEGIN BODY;}
-<STRING>(title>) { BEGIN TITLE;}
-<STRING>\>      {
-                  *s = 0;
-                  BEGIN 0;
-                }
-<STRING>.       { *s++ = *yytext; }
-<BODY>\<"/body>"  { BEGIN 0;}
-<BODY>[\r\n\t]	{ *s++ = *yytext;}
-<BODY>.        { bodyy[title]=*yytext;title++; *s++ = *yytext; }
-
-
-<TITLE>\<[^<]*    { BEGIN 0;}
-<TITLE>.          { titlee[title]=*yytext;
-                  title++;
-                  }
-\n                {}
+"<body>"		{ BEGIN BODY;}
+"<".[^-](.|[ \t])*">"	;
+.|\r|\n|\t		{;}
+<BODY>\<"/body>"	{BEGIN 0;}
+<BODY>[\r\n\t]		;
+<BODY>.			{bodyy[title]=*yytext;title++;strcpy(bodyyy[title], bodyy[title]);}
 %%
 /*! \brief Funkcja wyświetla zawartość pomocy.
  *
