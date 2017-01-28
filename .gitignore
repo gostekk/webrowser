@@ -32,5 +32,5 @@
 *.dSYM/
 *.su
 # Custom files
-./ponybrowser
+ponybrowser
 *.txt

@@ -45,7 +45,8 @@ static struct option const long_options[] =
 .|\r|\n|\t		{;}
 <BODY>\<"/body>"	{BEGIN 0;}
 <BODY>[\r\n\t]		;
-<BODY>.			{bodyy[title]=*yytext;title++;strcpy(bodyyy[title], bodyy[title]);}
+<BODY>"<br>"|"</br>"|"</ br>"	{strcat(bodyy, "\n");}
+<BODY>.			{strcat(bodyy,yytext);}
 %%
 /*! \brief Funkcja wyświetla zawartość pomocy.
  *
